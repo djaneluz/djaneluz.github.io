@@ -20,7 +20,43 @@
 </head>
 
 <body>
-	Welcome ;)
+  <h1>Segment Demo</h1>
+  <p>Form</p>
+  <form name="form" onsubmit="identify(event)">
+    <br><br><br>
+    <br><br> Name: <input name="fullname" size="75" type="text"/>
+    <br><br> Age: <input name="age" size="10" type="text"/>
+    <br><br> Gender: <input name="gender" size="15" type="text"/>
+    <br><br> Email: <input name="email" size="75" type="text"/>
+    <br><br><br><input name="submit" type="submit" value="submit" />
+  </form>
+  <script type="text/javascript">
+    function identify(e) {
+      e.preventDefault();
+      var form = e.target;
+      var fullname = form["fullname"].value;
+      var age = form["age"].value;
+      var gender = form["gender"].value;
+      var email = form["email"].value;
+
+      analytics.identify(12345, {
+        name: fullname,
+        email: email,
+        age: age,
+        gender: gender
+      }, {
+        'integrations' : {
+          'Salesforce': true
+        }
+      });
+
+      analytics.track('Form Submitted', {
+        type: "User information",
+      });
+      
+    }
+  </script>
+  
 </body>
 </html>
 
